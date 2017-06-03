@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title> Calendar Events </title>
+		<style>
+		body {
+		    margin: 0;
+		    padding: 0;
+		    text-align: center; /* !!! */
+		}
+
+		.centered {
+		    margin: 0 auto;
+		    text-align: left;
+		}
+		table, th, td{
+			max-width: 250px; 
+			word-wrap:break-word; 
+			border: 1px solid black;
+		}
+		h1{
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>
+		<h1> Calendar Events </h1>
+		<div class = "centered">
+		<table>
+		<tr>
+			<th>Event Date</th>
+		   <th>Event Title</th>
+		   <th>Event Description</th>
+		   <th>List of Attendees</th>
+		</tr>
+		<% for(var i=0; i < ResEvent.length; i++) { %>
+		   <tr>
+		   	 <td>
+		     	<% if(ResEvent[i].start.date != null){ %>
+		     		<%= ResEvent[i].start.date %>
+		     	<% } else{ %>
+		     		<%= ResEvent[i].start.dateTime %>
+		     	<% } %>
+		     </td>
+		     <td><%= ResEvent[i].summary %></td>
+		     <td>
+		     	<% if(ResEvent[i].description == null){ %>
+		     		No Description
+		     	<% } else{ %>
+		     		<%= ResEvent[i].description %>
+		     	<% } %>
+		     </td>
+		     <td>
+		     <% if(ResEvent[i].attendees == null){ %>
+		        No Attendees
+		      <% } else{ %>
+		     	<table>
+		     	<% for(var j=0; j < ResEvent[i].attendees.length; j++) { %>
+		     	<tr>
+		     		<td><%= ResEvent[i].attendees[j].displayName %>, <%= ResEvent[i].attendees[j].responseStatus %> </td>
+		     	</tr>
+		     	<% } %>
+		     	</table>
+		     	<% } %>
+		     </td>
+		   </tr>
+		<% } %>
+		</table>
+		</div>
+	</body>
+</html>

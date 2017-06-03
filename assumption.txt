@@ -1,0 +1,22 @@
+
+## Assumption Regarding dates
+# If startDate and endDate are not given, then startDate is initialised at the current date and endDate is initialised as the Date 1 year from now.
+
+# If startDate is given but endDate is not given, then startDate is initialised at the given startDate and endDate is initialised as the Date 1 year from startDate.
+
+# If startDate is not given and endDate is given, then endDate is initialised at the given endDate and startDate is initialised as the Date 1 year ago from endDate.
+
+# If startDate and endDate both are given, then startDate is initialised at the given startDate and endDate is initialised as the given endDate
+
+
+## Cache Management
+After getting the request to localhost:3007/calendar-events, the app first checks the startDate and endDate according to the above stated rules. 
+Now it traverses over the cache. If not in cache, then it hits the calendar API with the given dates and creates one cache with key as the start and end date concatenated with a '+' and stores all the events for this range in it.
+If it finds a cache where the requested start date and end date falls between the stored date range, then it simply returns without making a call to the API 
+
+
+## Modules
+# Used 'Moment' module for Dates and converting to ISOString and getting Date object back from ISOString
+# Used 'EJS' for HTML Templates
+# Used 'Express' on top of node.js to get more flexibility.
+# Used 'node-localstorage' for accessing the localStorage to store the cache
